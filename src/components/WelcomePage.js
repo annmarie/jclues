@@ -1,31 +1,15 @@
-import { Form, Button, Input } from 'antd';
-import { useState } from 'react';
 import _ from 'lodash';
-
-const onFinish = ({ setFormStatus, setProfile }) => {
-  return async (values) => {
-    setFormStatus && setFormStatus({ status: 2 });
-    const data = await new Promise((good) => setInterval(() => good(values), 300));
-    setFormStatus && setFormStatus({ status: 1, data });
-    setProfile && setProfile(data);
-  };
-};
-
-const onFinishFailed = (errorInfo) => {
-  console.log('Failed:', errorInfo);
-};
+import { Form, Button, Input } from 'antd';
 
 export default function WelcomePage(props) {
   const { profile, setProfile } = props;
-  const [formStatus, setFormStatus] = useState(0);
-  const formLoading = formStatus === 2 ? true : false;
+  const onFinish = () => async (values) => setProfile(values);
 
   return (
     <>
       <Form
         name="profile"
-        onFinish={onFinish({ setFormStatus, setProfile })}
-        onFinishFailed={onFinishFailed}
+        onFinish={onFinish()}
         layout="vertical"
         initialValues={{ username: _.get(profile, 'username', '') }}
       >
@@ -38,7 +22,7 @@ export default function WelcomePage(props) {
         </Form.Item>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit" loading={formLoading}>
+          <Button type="primary" htmlType="submit">
             Submit
           </Button>
         </Form.Item>

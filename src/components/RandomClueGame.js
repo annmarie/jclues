@@ -27,22 +27,14 @@ const AnswerText = ({ answer }) => {
 export default function RandomClueGame() {
   let clue = {};
   const [searchValue, setSearchValue] = useState({ toggle: 0 });
-
-  // fetch random clue data
-  const { isSuccess, data } = FetchRandomClue(searchValue);
-  // if success and data is an array
-  if (isSuccess && Array.isArray(data))
-    // parse and assign results
-    clue = CleanClueData({ clue: data.shift() });
-
   const updateClueData = () => {
-    // we are using react-query for caching api calls.
-    // Updating the state variable `searchValue`
-    // will reload the component and refetch the data.
     setSearchValue({ toggle: Date.now() });
   };
 
-  // render display
+  // fetch random clue data
+  const { isSuccess, data } = FetchRandomClue(searchValue);
+  if (isSuccess && Array.isArray(data)) clue = CleanClueData({ clue: data.shift() });
+
   return (
     <>
       <Button style={{ width: 300 }} onClick={updateClueData}>

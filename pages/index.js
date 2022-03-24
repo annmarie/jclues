@@ -10,7 +10,8 @@ import PageFooter from 'src/components/PageFooter';
 import { useState } from 'react';
 
 const PageRouter = (props) => {
-  switch (props.asPath) {
+  const { asPath } = props;
+  switch (asPath) {
     case '/jclues':
       return <JcluesPage {...props} />;
     default:
