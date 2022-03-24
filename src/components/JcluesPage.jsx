@@ -1,6 +1,6 @@
 import RandomClueGame from 'src/components/RandomClueGame';
 
-export default function Jclues(props) {
+export default function JcluesPage(props) {
   return (
     <>
       <h1>Random Clue Game</h1>
