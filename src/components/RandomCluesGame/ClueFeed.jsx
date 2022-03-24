@@ -8,18 +8,23 @@ export default function ClueFeed(props) {
   let clues = [];
   const { isSuccess, data } = FetchRandomClue(searchQuery);
   if (isSuccess && Array.isArray(data)) {
-    clues = data.map(cleanClueData);
+    clues = data.filter(filterClue).map(cleanClue);
   } else {
     return '';
   }
 
   return clues.map((clue) => {
-    const key = _.get(clue, 'key');
-    return key ? <ClueCard key={key} clue={clue} /> : '';
+    const id = _.get(clue, 'id');
+    return <ClueCard key={id} clue={clue} />;
   });
 }
 
-function cleanClueData(clue) {
+function filterClue(clue) {
+  const { id, question } = clue;
+  return id && question ? true : false;
+}
+
+function cleanClue(clue) {
   let airdate = _.get(clue, 'airdate');
   if (airdate) {
     airdate = airdate ? Date.parse(airdate) : '';

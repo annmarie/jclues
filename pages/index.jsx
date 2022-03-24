@@ -4,20 +4,10 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import appConfig from 'app-config';
 import JcluesPage from 'src/components/JcluesPage';
-import WelcomePage from 'src/components/WelcomePage';
+import HomePage from 'src/components/HomePage';
 import ProfileHeader from 'src/components/ProfileHeader';
 import PageFooter from 'src/components/PageFooter';
 import { useState } from 'react';
-
-const PageRouter = (props) => {
-  const { asPath } = props;
-  switch (asPath) {
-    case '/jclues':
-      return <JcluesPage {...props} />;
-    default:
-      return <WelcomePage {...props} />;
-  }
-};
 
 export default function Index(props) {
   const { Content, Footer, Header } = Layout;
@@ -66,4 +56,16 @@ export function getServerSideProps() {
 
   // pass page props to app
   return { props };
+}
+
+function PageRouter(props) {
+  const { asPath } = props;
+  switch (asPath) {
+    case '/jclues':
+      return <JcluesPage {...props} />;
+    case '/':
+      return <HomePage {...props} />;
+    default:
+      return 'page not found';
+  }
 }

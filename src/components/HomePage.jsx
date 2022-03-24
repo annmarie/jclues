@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { Form, Button, Input } from 'antd';
 
-export default function WelcomePage(props) {
+export default function HomePage(props) {
   const { profile, setProfile } = props;
   const onFinish = () => async (values) => setProfile(values);
 

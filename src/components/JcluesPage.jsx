@@ -1,10 +1,10 @@
-import RandomClueGame from 'src/components/RandomClueGame';
+import RandomCluesGame from 'src/components/RandomCluesGame';
 
 export default function JcluesPage(props) {
   return (
     <>
-      <h1>Random Clue Game</h1>
-      <RandomClueGame {...props} />
+      <h1>Random Clues Game</h1>
+      <RandomCluesGame {...props} />
     </>
   );
 }
